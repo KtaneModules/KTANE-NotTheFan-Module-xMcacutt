@@ -1619,7 +1619,7 @@ MonoBehaviour:
   Module: {fileID: 114625954972240494}
   Audio: {fileID: 114764021224929736}
   MistParticles: {fileID: 198360578319999000}
-  SmokeParticles: {fileID: 1007447303806292}
+  SmokeParticles: {fileID: 0}
   powerLightMeshRenderer: {fileID: 23802525351201056}
   powerLightOnMat: {fileID: 2100000, guid: 7c0f328cd00dc48c6b27ca9fcd223941, type: 2}
   powerLightOffMat: {fileID: 2100000, guid: 66be748e50333495fa358705c328bcd6, type: 2}
