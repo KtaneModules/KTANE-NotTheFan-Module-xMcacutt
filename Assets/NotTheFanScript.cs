@@ -109,7 +109,7 @@ public class NotTheFanScript : MonoBehaviour
 		rotationSpeed = 10;
 		Debug.Log("[Not The Fan #" + moduleId + "] New words generated!");
 		Debug.Log("[Not The Fan #" + moduleId + "] Step 1 initial word: " + _solutionWords[0].ToUpperInvariant());
-		Debug.Log("[Not The Fan #" + moduleId + "] Step 2 words: " + _solutionWords.Skip(1).Take(4).Join().ToUpperInvariant());
+		Debug.Log("[Not The Fan #" + moduleId + "] Step 2 words: " + _solutionWords.Skip(1).Take(2).Join().ToUpperInvariant());
 		Debug.Log("[Not The Fan #" + moduleId + "] Step 3 final word: " + _solutionWords.Last().ToUpperInvariant());
 		_completedLetterCount = 0;
 		_completedWordCount = 0;
@@ -121,7 +121,7 @@ public class NotTheFanScript : MonoBehaviour
 	void SetNextExpectedInput()
 	{
 		var word = _solutionWords[_completedWordCount];
-		if (_completedWordCount < 5)
+		if (_completedWordCount < 3)
 		{
 			var nextWord = _solutionWords[_completedWordCount + 1];
 			_currentStateSet = GetFanStates(nextWord);
@@ -157,7 +157,7 @@ public class NotTheFanScript : MonoBehaviour
 	public string[] GetSolution()
 	{
 		var keywordRows = _wordList
-			.Select((_, index) => index / 4).Distinct().OrderBy(_ => _random.Next()).Take(5).ToArray();
+			.Select((_, index) => index / 4).Distinct().OrderBy(_ => _random.Next()).Take(3).ToArray();
 		var keywords = keywordRows
 			.Select(row => _wordList[row * 4 + _random.Next(0, 4)]).ToList();
 		var keywordDigitSum = keywords
@@ -176,8 +176,8 @@ public class NotTheFanScript : MonoBehaviour
 		var state2 = (letterIndex - state1 * 9) / 3;
 		var state3 = letterIndex - state1 * 9 - state2 * 3;
 		var configIndex = (wordIndex % 4);
-		var state4 = configIndex / 2;
-		var state5 = configIndex - state4 * 2;
+		var state4 = configIndex % 2;
+		var state5 = configIndex / 2;
 		return new[] { (FanState)state1, (FanState)state2, (FanState)state3, 
 			state4 == 0 ? FanState.Counter : FanState.Clock, state5 == 0 ? FanState.Counter : FanState.Clock };
 	}
@@ -191,7 +191,7 @@ public class NotTheFanScript : MonoBehaviour
 			return true;
 
 		_userInput = "";
-		if (_completedWordCount < 5)
+		if (_completedWordCount < 3)
 			SetFanState(_currentStateSet[_completedLetterCount]);
 		else
 		{
@@ -220,7 +220,7 @@ public class NotTheFanScript : MonoBehaviour
 	private void HandleCompletedWord()
 	{
 		_completedWordCount++;
-		if (_completedWordCount == 6)
+		if (_completedWordCount == 4)
 		{
 			Module.HandlePass();
 			_isSolved = true;
@@ -277,32 +277,32 @@ public class NotTheFanScript : MonoBehaviour
 	
 	private readonly string[] _wordList =
 	{
-		"AnGle", "AnGl3", "AnG1e", "AnG13", 
-		"blAde", "blAd3", "8lAde", "8lAd3",
-		"clocK", "cl0cK", "c1ocK", "c10cK",
-		"dRAfT", "dRAf7", "dR4fT", "dR4f7",
-		"edGes", "edGe5", "edG3s", "edG35",
-		"flows", "fl0ws", "f1ows", "f10ws",
-		"GRIll", "GRI1l", "GR1ll", "GR11l",
-		"HoVeR", "HoV3R", "H0VeR", "H0V3R",
-		"InPUT", "InPU7", "1nPUT", "1nPU7",
-		"joInT", "jo1nT", "7oInT", "7o1nT",
-		"Knobs", "Knob5", "Kn0bs", "Kn0b5",
-		"lARGe", "lARG3", "l4RGe", "l4RG3",
-		"moToR", "mo7oR", "m0ToR", "m07oR",
-		"noIse", "noIs3", "noI5e", "noI53",
-		"oRbIT", "oRbI7", "oR6IT", "oR6I7",
-		"PoweR", "Pow3R", "P0weR", "P0w3R",
-		"qUIcK", "qU1cK", "9UIcK", "9U1cK",
-		"RoboT", "Ro6oT", "Robo7", "Ro6o7",
-		"sPIns", "sP1ns", "5PIns", "5P1ns",
-		"TwIsT", "TwI5T", "TwIs7", "TwI57",
-		"UPdoG", "UPdo9", "UP4oG", "UP4o9",
-		"VAlUe", "VAlU3", "V4lUe", "V4lU3",
-		"woosH", "wo0sH", "w0osH", "w00sH",
-		"XeRic", "XeR1c", "X3Ric", "X3R1c",
-		"yIeld", "yI3ld", "y1eld", "y13ld",
-		"zooms", "zoom5", "2ooms", "2oom5",
+		"AnGle", "AnG1e", "AnGl3", "AnG13", 
+		"blAde", "8lAde", "blAd3", "8lAd3",
+		"clocK", "c1ocK", "cl0cK", "c10cK",
+		"dRAfT", "dR4fT", "dRAf7", "dR4f7",
+		"edGes", "edG3s", "edGe5", "edG35",
+		"flows", "f1ows", "fl0ws", "f10ws",
+		"GRIll", "GR1ll", "GRI1l", "GR11l",
+		"HoVeR", "H0VeR", "HoV3R", "H0V3R",
+		"InPUT", "1nPUT", "InPU7", "1nPU7",
+		"joInT", "7oInT", "jo1nT", "7o1nT",
+		"Knobs", "Kn0bs", "Knob5", "Kn0b5",
+		"lARGe", "l4RGe", "lARG3", "l4RG3",
+		"moToR", "m0ToR", "mo7oR", "m07oR",
+		"noIse", "noI5e", "noIs3", "noI53",
+		"oRbIT", "oR6IT", "oRbI7", "oR6I7",
+		"PoweR", "P0weR", "Pow3R", "P0w3R",
+		"qUIcK", "9UIcK", "qU1cK", "9U1cK",
+		"RoboT", "Robo7", "Ro6oT", "Ro6o7",
+		"sPIns", "5PIns", "sP1ns", "5P1ns",
+		"TwIsT", "TwIs7", "TwI5T", "TwI57",
+		"UPdoG", "UP4oG", "UPdo9", "UP4o9",
+		"VAlUe", "V4lUe", "VAlU3", "V4lU3",
+		"woosH", "w0osH", "wo0sH", "w00sH",
+		"XeRic", "X3Ric", "XeR1c", "X3R1c",
+		"yIeld", "y1eld", "yI3ld", "y13ld",
+		"zooms", "2ooms", "zoom5", "2oom5",
 		// First three fans give the row
 		// Last two fans give the column
 	};

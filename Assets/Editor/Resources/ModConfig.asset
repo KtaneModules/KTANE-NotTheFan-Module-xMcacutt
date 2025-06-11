@@ -14,12 +14,12 @@ MonoBehaviour:
   id: notTheFan
   title: Not The Fan
   author: xMcacutt
-  description: 'Not The Fan v1.0.0
+  description: 'Not The Fan v1.0.1
 
     right ''round right ''round.
 
 
     Source Code: https://github.com/xMcacutt/KTaNE-NotTheFan-Module'
-  version: 1.0.0
+  version: 1.0.1
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 8a629806e5f2b8d4ebd60f54a3a4f38a, type: 3}
