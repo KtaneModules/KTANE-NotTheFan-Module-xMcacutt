@@ -161,8 +161,11 @@ public class NotTheFanScript : MonoBehaviour
 		var keywords = keywordRows
 			.Select(row => _wordList[row * 4 + _random.Next(0, 4)]).ToList();
 		var keywordDigitSum = keywords
-			.SelectMany(word => word.Where(char.IsDigit)).Select(digitChar => digitChar - '0').Sum(digit => (digit + 1) * 3);
-		var keywordRow = keywordDigitSum % 26;
+			.SelectMany(word => word.Where(char.IsDigit))
+			.Select(digitChar => digitChar - '0')
+			.Sum(digit => (digit + 1) * 3);
+		var keywordValue = ((keywordDigitSum - 1) % 26 + 1);
+		var keywordRow = keywordValue - 1; 
 		var finalWord = _wordList[keywordRow * 4];
 		keywords.Add(finalWord);
 		return keywords.ToArray();
@@ -278,7 +281,7 @@ public class NotTheFanScript : MonoBehaviour
 	private readonly string[] _wordList =
 	{
 		"AnGle", "AnG1e", "AnGl3", "AnG13", 
-		"blAde", "8lAde", "blAd3", "8lAd3",
+		"blAde", "6lAde", "blAd3", "6lAd3",
 		"clocK", "c1ocK", "cl0cK", "c10cK",
 		"dRAfT", "dR4fT", "dRAf7", "dR4f7",
 		"edGes", "edG3s", "edGe5", "edG35",
@@ -294,13 +297,13 @@ public class NotTheFanScript : MonoBehaviour
 		"oRbIT", "oR6IT", "oRbI7", "oR6I7",
 		"PoweR", "P0weR", "Pow3R", "P0w3R",
 		"qUIcK", "9UIcK", "qU1cK", "9U1cK",
-		"RoboT", "Robo7", "Ro6oT", "Ro6o7",
+		"RoboT", "Robo7", "8oboT", "8obo7",
 		"sPIns", "5PIns", "sP1ns", "5P1ns",
 		"TwIsT", "TwIs7", "TwI5T", "TwI57",
 		"UPdoG", "UP4oG", "UPdo9", "UP4o9",
 		"VAlUe", "V4lUe", "VAlU3", "V4lU3",
 		"woosH", "w0osH", "wo0sH", "w00sH",
-		"XeRic", "X3Ric", "XeR1c", "X3R1c",
+		"XeRIc", "X3RIc", "XeR1c", "X3R1c",
 		"yIeld", "y1eld", "yI3ld", "y13ld",
 		"zooms", "2ooms", "zoom5", "2oom5",
 		// First three fans give the row
