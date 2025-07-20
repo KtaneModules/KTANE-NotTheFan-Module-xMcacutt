@@ -29,7 +29,7 @@ public static class NotTheFanExtensions
 		{ '0', "-----" }, { '1', ".----" }, { '2', "..---" }, { '3', "...--" }, { '4', "....-" }, { '5', "....." },
 		{ '6', "-...." }, { '7', "--..." }, { '8', "---.." }, { '9', "----." }, { 'A', ".-" }, { 'B', "-..." }, 
 		{ 'C', "-.-." }, { 'D', "-.." }, { 'E', "." }, { 'F', "..-." }, { 'G', "--." }, 
-		{ 'H', "...." }, { 'I', ".." }, { 'J', "---." }, { 'K', "-.-" }, { 'L', ".-.." }, 
+		{ 'H', "...." }, { 'I', ".." }, { 'J', ".---" }, { 'K', "-.-" }, { 'L', ".-.." }, 
 		{ 'M', "--" }, { 'N', "-." }, { 'O', "---" }, { 'P', ".--." }, { 'Q', "--.-" }, 
 		{ 'R', ".-." }, { 'S', "..." }, { 'T', "-" }, { 'U', "..-" }, { 'V', "...-" }, 
 		{ 'W', ".--" }, { 'X', "-..-" }, { 'Y', "-.--" }, { 'Z', "..--" }
@@ -321,10 +321,9 @@ public class NotTheFanScript : MonoBehaviour
 		var match = Regex.Match(command, @"^\s*(?:i|in|input)\s+([.-]+)", RegexOptions.IgnoreCase);
 		if (!match.Success)
 			yield break;
-
 		string morse = match.Groups[1].Value;
-		yield return StartCoroutine(PlayMorseQueue(morse));
 		yield return null;
+		yield return StartCoroutine(PlayMorseQueue(morse));
 	}
 	
 	IEnumerator PlayMorseQueue(string morse)
